@@ -1,18 +1,20 @@
-<div class="container">
+<div class="container" *ngIf="cityWeatherData">
   <div class="upper-data">
     <img
       src="../assets/imgs/hot-day.jpg"
       alt="praia dia quente"
-      *ngIf="25 > 26"
+      *ngIf="cityWeatherData.currentConditions.temp > 26"
     />
     <img
       src="../assets/imgs/cold-day.jpg"
       alt="praia dia frio"
-      *ngIf="25 < 26"
+      *ngIf="cityWeatherData.currentConditions.temp < 26"
     />
     <div class="weather-data">
-      <div class="location">João Pessoa</div>
-      <div class="temperature">{{ 28.4 | number : "1.0-0" }}°C</div>
+      <div class="location">{{ cityWeatherData.resolvedAddress }}</div>
+      <div class="temperature">
+        {{ cityWeatherData.currentConditions.temp }}°C
+      </div>
     </div>
   </div>
 
@@ -27,7 +29,9 @@
           <img src="../assets/imgs/icons8-cold-96.png" />
           <span>Minima</span>
         </div>
-        <div class="info-block-value">10°C</div>
+        <div class="info-block-value">
+          {{ cityWeatherData.days[0].tempmin }}°C
+        </div>
       </div>
 
       <div class="info-block">
@@ -35,7 +39,9 @@
           <img src="../assets/imgs/icons8-hot-96.png" />
           <span>Máxima</span>
         </div>
-        <div class="info-block-value">28°C</div>
+        <div class="info-block-value">
+          {{ cityWeatherData.days[0].tempmax }}°C
+        </div>
       </div>
 
       <div class="info-block">
@@ -43,7 +49,9 @@
           <img src="../assets/imgs/icons8-dew-point-96.png" />
           <span>Umidade</span>
         </div>
-        <div class="info-block-value">85%</div>
+        <div class="info-block-value">
+          {{ cityWeatherData.currentConditions.humidity }}%
+        </div>
       </div>
 
       <div class="info-block">
@@ -51,7 +59,9 @@
           <img src="../assets/imgs/icons8-windy-weather-96.png" />
           <span>Vento</span>
         </div>
-        <div class="info-block-value">12 km/h</div>
+        <div class="info-block-value">
+          {{ cityWeatherData.currentConditions.windspeed }} km/h
+        </div>
       </div>
     </div>
   </div>
